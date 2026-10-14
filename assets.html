@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub — Бесплатные ассеты для разработки игр</title>
+    <style>
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта (Точно такая же, как на всех страницах) */
+        header {
+            background-color: #050505;
+            border-bottom: 2px solid var(--gold);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--gold-hover);
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Контейнер страницы */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .page-title h1 span {
+            color: var(--gold);
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 24px;
+            color: var(--gold);
+            border-left: 4px solid var(--gold);
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+        }
+
+        /* Сетка ресурсов */
+        .assets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .asset-card {
+            background-color: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+
+        .asset-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .asset-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .asset-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-light);
+        }
+
+        .asset-badge {
+            background-color: #252525;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            text-transform: uppercase;
+        }
+
+        .asset-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 0 0 20px 0;
+            flex-grow: 1;
+        }
+.btn-link {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 8px 18px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-link:hover {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #050505;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid #2a2a2a;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <header>
+        <a href="index.html" class="logo">GameHub</a>
+        <nav class="nav-links">
+            <a href="index.html#engines">Движки</a>
+            <a href="quiz.html">Пройти Тест</a>
+            <a href="assets.html" style="color: var(--gold);">Бесплатные Ассеты</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <div class="page-title">
+            <h1>Каталог бесплатных <span>Ассетов</span></h1>
+            <p>Не трать время на рисование и запись звуков с нуля. Мы собрали лучшие легальные библиотеки графики, моделей и музыки для твоих проектов.</p>
+        </div>
+
+        <!-- Раздел Графики -->
+        <h2 class="section-title">2D Графика и Текстуры</h2>
+        <div class="assets-grid">
+            
+            <div class="asset-card">
+                <div>
+                    <div class="asset-header">
+                        <h3 class="asset-name">Kenney.nl</h3>
+                        <span class="asset-badge">2D / 3D / Audio</span>
+                    </div>
+                    <p>Легендарный сайт «короля бесплатных ассетов». Тысячи пиксельных и векторных спрайтов, плиток интерфейса (UI) и простейших 3D-моделей. Все материалы абсолютно бесплатны и свободны от авторских прав (CC0).</p>
+                </div>
+                <a href="https://kenney.nl" target="_blank" class="btn-link">Открыть сайт ресурса</a>
+            </div>
+
+            <div class="asset-card">
+                <div>
+                    <div class="asset-header">
+                        <h3 class="asset-name">OpenGameArt</h3>
+                        <span class="asset-badge">Спрайты / Ретро</span>
+                    </div>
+                    <p>Крупнейшее мировое сообщество 2D-художников. Огромная база пиксель-арта, текстур, фонов для платформеров и готовых анимаций персонажей. Идеально подходит для проектов на Unity, Godot и RPG Maker.</p>
+                </div>
+                <a href="https://opengameart.org" target="_blank" class="btn-link">Открыть сайт ресурса</a>
+            </div>
+
+        </div>
+
+        <!-- Раздел 3D Моделей -->
+        <h2 class="section-title">3D Моделирование</h2>
+        <div class="assets-grid">
+            
+            <div class="asset-card">
+                <div>
+                    <div class="asset-header">
+                        <h3 class="asset-name">Sketchfab</h3>
+                        <span class="asset-badge">3D Модели / Low-Poly</span>
+                    </div>
+                    <p>Гигантская платформа трехмерной графики. Встроены удобные фильтры поиска бесплатных моделей, доступных для использования. Идеальный источник для наполнения уровней в Unreal Engine.</p>
+                </div>
+                <a href="https://sketchfab.com" target="_blank" class="btn-link">Открыть сайт ресурса</a>
+            </div>
+
+            <div class="asset-card">
+                <div>
+                    <div class="asset-header">
+<h3 class="asset-name">Poly Haven</h3>
+                        <span class="asset-badge">HDRi / Текстуры</span>
+                    </div>
+                    <p>Профессиональная библиотека материалов с открытым доступом. Содержит фотореалистичные PBR-текстуры поверхностей (камень, дерево, металл) высокого разрешения и панорамные HDRi карты для настройки реалистичного освещения.</p>
+                </div>
+                <a href="https://polyhaven.com" target="_blank" class="btn-link">Открыть сайт ресурса</a>
+            </div>
+
+        </div>
+
+        <!-- Раздел Звуков и Музыки -->
+        <h2 class="section-title">Звуковые эффекты и Музыка</h2>
+        <div class="assets-grid">
+            
+            <div class="asset-card">
+                <div>
+                    <div class="asset-header">
+                        <h3 class="asset-name">Freesound</h3>
+                        <span class="asset-badge">Звуки / SFX</span>
+                    </div>
+                    <p>Огромная база аудиосэмплов, наполняемая звукорежиссерами со всего мира. Здесь можно найти любые шумы: от шагов по траве и взрывов до фантастических лазерных выстрелов и щелчков интерфейса.</p>
+                </div>
+                <a href="https://freesound.org" target="_blank" class="btn-link">Открыть сайт ресурса</a>
+            </div>
+
+            <div class="asset-card">
+                <div>
+                    <div class="asset-header">
+                        <h3 class="asset-name">Incompetech</h3>
+                        <span class="asset-badge">Саундтреки / Фоновая</span>
+                    </div>
+                    <p>Сайт композитора Кевина Маклауда, чья музыка играет во множестве инди-игр. Удобный поиск фоновых кинематографичных и 8-битных треков, разбитый по игровым жанрам и настроению.</p>
+                </div>
+                <a href="https://incompetech.com" target="_blank" class="btn-link">Открыть сайт ресурса</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 GameHub. Проект начинающих разработчиков.</p>
+    </footer>
+
+</body>
+</html>

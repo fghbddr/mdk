@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub — Тест: Выбери свой движок</title>
+    <style>
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Шапка (точно такая же, как на главной) */
+        header {
+            background-color: #050505;
+            border-bottom: 2px solid var(--gold);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--gold-hover);
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Контейнер теста */
+        .quiz-container {
+            max-width: 650px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            color: var(--gold);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            border-left: 3px solid var(--gold);
+            padding-left: 15px;
+        }
+
+        /* Кнопки вариантов ответа */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-btn {
+            background-color: #222;
+            color: var(--text-light);
+            border: 1px solid #333;
+            padding: 15px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .option-btn:hover {
+            border-color: var(--gold);
+            background-color: #2a2515;
+            transform: translateX(5px);
+        }
+
+        /* Блок результата */
+        .result-box {
+            display: none; /* Скрыт по умолчанию */
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .result-title {
+            font-size: 24px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .engine-name {
+            font-size: 38px;
+            color: var(--gold);
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .result-desc {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .btn-action {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            margin: 10px;
+            cursor: pointer;
+        }
+.btn-action:hover {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка со ссылкой назад на главную -->
+    <header>
+        <a href="index.html" class="logo">GameHub</a>
+        <nav class="nav-links">
+            <a href="index.html#engines">Движки</a>
+            <a href="quiz.html" style="color: var(--gold);">Пройти Тест</a>
+            <a href="assets.html">Бесплатные Ассеты</a>
+        </nav>
+    </header>
+
+    <div class="quiz-container">
+        <!-- Блок самого теста -->
+        <div id="quiz-box">
+            <h1>Подбор движка</h1>
+            <div class="question-text" id="question">Загрузка вопроса...</div>
+            <div class="options-list" id="options">
+                <!-- Сюда JavaScript вставит кнопки ответов -->
+            </div>
+        </div>
+
+        <!-- Блок вывода результата -->
+        <div id="result-box" class="result-box">
+            <div class="result-title">Твой идеальный выбор:</div>
+            <div class="engine-name" id="res-engine">Unity</div>
+            <div class="result-desc" id="res-desc">Описание движка...</div>
+            
+            <a href="" id="res-link" class="btn-action">Перейти к гайдам</a>
+            <button onclick="restartQuiz()" class="btn-action" style="border-color: #555; color: #aaa;">Пройти заново</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 GameHub. Проект начинающих разработчиков.</p>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                text: "1. Какую графику ты планируешь делать в игре?",
+                options: [
+                    { text: "Строго 2D (пиксели, спрайты, плоский мир)", score: { godot: 3, construct: 3, unity: 1 } },
+                    { text: "Красивое и технологичное 3D", score: { unreal: 4, unity: 2 } },
+                    { text: "Простое 3D или смесь 2D/3D", score: { unity: 3, godot: 2 } },
+                    { text: "Вообще без графики, только текст и картинки (новелла)", score: { renpy: 5 } }
+                ]
+            },
+            {
+                text: "2. Насколько хорошо ты знаешь языки программирования?",
+                options: [
+                    { text: "Вообще не умею кодить и боюсь этого", score: { construct: 4, rpgmaker: 3 } },
+                    { text: "Знаю основы C# / C++ / Python", score: { unity: 2, unreal: 2, renpy: 2, godot: 2 } },
+                    { text: "Готов учить скриптовые легкие языки", score: { godot: 3, renpy: 3, rpgmaker: 2 } }
+                ]
+            },
+            {
+                text: "3. Каков масштаб твоей задумки?",
+                options: [
+                    { text: "Маленькая инди-игра для души или мобилок", score: { unity: 2, godot: 3, construct: 2 } },
+                    { text: "Огромная RPG в стиле ретро", score: { rpgmaker: 5 } },
+                    { text: "Крупный проект с упором на реалистичную картинку", score: { unreal: 5 } }
+                ]
+            }
+        ];
+
+        const enginesInfo = {
+            unity: { name: "Unity", desc: "Универсальный движок на C#. Идеален для мобильных игр и инди-проектов любой сложности.", link: "unity-roadmap.html" },
+            unreal: { name: "Unreal Engine", desc: "Король 3D графики. Отличный выбор для тяжелых, красивых игр на ПК и консоли.", link: "unreal-roadmap.html" },
+            godot: { name: "Godot Engine", desc: "Легкий, бесплатный и очень удобный движок для 2D и несложного 3D.", link: "godot-roadmap.html" },
+            construct: { name: "Construct 3", desc: "Идеально для быстрого старта без единой строчки кода. Создавай игры прямо в браузере.", link: "construct-roadmap.html" },
+            renpy: { name: "Ren'Py", desc: "Лучший движок для визуальных новелл и интерактивных текстовых историй на Python.", link: "renpy-roadmap.html" },
+            rpgmaker: { name: "RPG Maker", desc: "Специализированный инструмент для создания пиксельных RPG старой школы.", link: "rpgmaker-roadmap.html" }
+        };
+
+        let currentQuestion = 0;
+        let scores = { unity: 0, unreal: 0, godot: 0, construct: 0, renpy: 0, rpgmaker: 0 };
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById("question").innerText = q.text;
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+
+            q.options.forEach(opt => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = opt.text;
+                btn.onclick = () => selectOption(opt.score);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function selectOption(scorePoints) {
+            for (let key in scorePoints) {
+                if (scores[key] !== undefined) scores[key] += scorePoints[key];
+            }
+
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.getElementById("quiz-box").style.display = "none";
+            document.getElementById("result-box").style.display = "block";
+let winner = "unity";
+            let maxScore = -1;
+            for (let key in scores) {
+                if (scores[key] > maxScore) {
+                    maxScore = scores[key];
+                    winner = key;
+                }
+            }
+
+            const result = enginesInfo[winner];
+            document.getElementById("res-engine").innerText = result.name;
+            document.getElementById("res-desc").innerText = result.desc;
+            document.getElementById("res-link").href = result.link;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            scores = { unity: 0, unreal: 0, godot: 0, construct: 0, renpy: 0, rpgmaker: 0 };
+            document.getElementById("quiz-box").style.display = "block";
+            document.getElementById("result-box").style.display = "none";
+            showQuestion();
+        }
+
+        // Запуск при старте страницы
+        showQuestion();
+    </script>

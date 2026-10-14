@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub — Гайды по Unity: Интерфейс и UI</title>
+    <style>
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --code-bg: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: #050505;
+            border-bottom: 2px solid var(--gold);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--gold-hover);
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Основной контейнер (Две колонки) */
+        .main-layout {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        /* Левая колонка: Содержание гайда */
+        .sidebar {
+            background-color: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h3 {
+            color: var(--gold);
+            margin-top: 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .roadmap-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .roadmap-steps li {
+            margin-bottom: 12px;
+        }
+
+        .roadmap-steps a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            background-color: #111;
+            border: 1px solid #2a2a2a;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-steps a:hover, .roadmap-steps li.active a {
+            color: var(--gold);
+            border-color: var(--gold);
+            background-color: #1e1b10;
+        }
+
+        .step-num {
+            background-color: #252525;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .roadmap-steps li.active .step-num {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        /* Правая колонка: Текст статьи */
+        .content-area {
+            background-color: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 40px;
+        }
+
+        .content-area h1 {
+            color: var(--gold);
+            margin-top: 0;
+            font-size: 36px;
+        }
+.content-area h2 {
+            color: var(--gold);
+            font-size: 22px;
+            margin-top: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border-left: 4px solid var(--gold);
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            color: #f8f8f2;
+            font-size: 14px;
+        }
+
+        .info-note {
+            background-color: #1e1b10;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin: 25px 0;
+        }
+
+        .info-note h4 {
+            color: var(--gold);
+            margin: 0 0 5px 0;
+        }
+
+        /* Кнопка GitHub */
+        .github-box {
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .github-info h4 {
+            margin: 0 0 5px 0;
+            color: var(--text-light);
+        }
+
+        .github-info p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .btn-github {
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-github:hover {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #050505;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid #2a2a2a;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">GameHub</a>
+        <nav class="nav-links">
+            <a href="index.html#engines">Движки</a>
+            <a href="quiz.html">Пройти Тест</a>
+            <a href="assets.html">Бесплатные Ассеты</a>
+        </nav>
+    </header>
+
+    <div class="main-layout">
+        
+        <!-- Меню дорожной карты (Активен 4 пункт) -->
+        <aside class="sidebar">
+            <h3>Дорожная карта</h3>
+            <ul class="roadmap-steps">
+                <li><a href="unity-install.html"><span class="step-num">1</span> Установка Unity</a></li>
+                <li><a href="unity-roadmap.html"><span class="step-num">2</span> Передвижение 2D</a></li>
+                <li><a href="unity-enemies.html"><span class="step-num">3</span> Создание врагов</a></li>
+                <li class="active"><a href="unity-ui.html"><span class="step-num">4</span> Интерфейс и UI</a></li>
+                <li><a href="unity-build.html"><span class="step-num">5</span> Сборка игры (Билд)</a></li>
+            </ul>
+        </aside>
+
+        <!-- Текст гайда по UI -->
+        <main class="content-area">
+            <h1>Создание игрового интерфейса (UI)</h1>
+            <p>Игровой интерфейс (User Interface) отображает для игрока важную информацию: текущее количество здоровья, очки, собранные монеты или патроны. В Unity для этого используется система <strong>UI Toolkit</strong> или классический <strong>Canvas</strong>.</p>
+<h2>Шаг 1. Создание элементов интерфейса</h2>
+            <p>Нажмите правой кнопкой мыши в панели Hierarchy и выберите <strong>UI -> Canvas</strong>. Холст (Canvas) — это невидимая плоскость, на которой будут размещаться все плоские элементы интерфейса поверх вашей игры. Внутри Canvas создайте элемент <strong>Text - TextMeshPro</strong> для отображения счета.</p>
+
+            <div class="info-note">
+                <h4>⚠️ Внимание: Тексты на русском языке</h4>
+                <p>Стандартные шрифты Unity не поддерживают кириллицу. Чтобы текст на русском языке не отображался квадратиками, используйте инструмент <strong>TextMeshPro -> Font Asset Creator</strong> для импорта любого привычного шрифта (например, Arial или Roboto).</p>
+            </div>
+
+            <h2>Шаг 2. Написание UI-менеджера на C#</h2>
+            <p>Чтобы изменять текст счета из кода при подборе монеты, напишем простой скрипт-менеджер. Создайте C# скрипт <code>UIManager</code> и прикрепите его к Canvas:</p>
+
+<pre><code>using UnityEngine;
+using TMPro; // Обязательное пространство имен для работы с текстом
+
+public class UIManager : MonoBehaviour
+{
+    public TextMeshProUGUI scoreText;
+    private int score = 0;
+
+    public void AddScore(int points)
+    {
+        score += points;
+        scoreText.text = "Монеты: " + score;
+    }
+}</code></pre>
+
+            <h2>Шаг 3. Готовые UI ассеты на GitHub</h2>
+            <p>В этом репозитории вы найдете стилизованный шаблон игрового интерфейса: готовые шкалы здоровья (HP Bar), кастомные шрифты и настроенное меню паузы.</p>
+
+            <div class="github-box">
+                <div class="github-info">
+                    <h4>GitHub: Unity-2D-UI-HUD-Template</h4>
+                    <p>Красивые текстуры кнопок, готовые шрифты и скрипт подсчета очков для инди-платформера.</p>
+                </div>
+                <a href="https://github.com" target="_blank" class="btn-github">
+                    📦 Скачать с GitHub
+                </a>
+            </div>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 GameHub. Проект начинающих разработчиков.</p>
+    </footer>
+
+</body>
+</html>

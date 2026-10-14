@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub — Платформа для геймдева</title>
+    <style>
+        /* Базовые стили и черно-золотая палитра */
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта (Навигация) */
+        header {
+            background-color: #050505;
+            border-bottom: 2px solid var(--gold);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--gold-hover);
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Главный баннер (Hero Section) */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #050505, var(--bg-dark));
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Сетка игровых движков (Карточки) */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: var(--gold);
+            border-left: 4px solid var(--gold);
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        .engine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 25px;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .card h3 {
+            font-size: 26px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        /* Стили для тегов-признаков */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background-color: #252525;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+/* Кнопки переходов */
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Дополнительные интерактивные блоки */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background-color: #111;
+            border-left: 3px solid var(--gold);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .feature-card h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--gold);
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Подвал */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #050505;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid #2a2a2a;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка с логотипом-ссылкой -->
+    <header>
+        <a href="index.html" class="logo">GameHub</a>
+        <nav class="nav-links">
+            <a href="#engines">Движки</a>
+            <a href="quiz.html">Пройти Тест</a>
+            <a href="assets.html">Бесплатные Ассеты</a>
+        </nav>
+    </header>
+
+    <!-- Приветственный блок -->
+    <section class="hero">
+        <h1>Создай свою первую игру вместе с <span>GameHub</span></h1>
+        <p>Мы собрали лучшие движки, пошаговые гайды, шпаргалки и готовые исходные коды с GitHub в одном месте. Выбирай свой путь ниже.</p>
+    </section>
+
+    <div class="container">
+        
+        <!-- Секция выбора движков -->
+        <h2 id="engines" class="section-title">Выбери игровой движок</h2>
+       <div class="engine-grid">
+            
+            <!-- 1. Unity -->
+            <div class="card">
+                <div>
+                    <h3>Unity</h3>
+                    <div class="tags">
+                        <span class="tag">Инди</span>
+                        <span class="tag">2D / 3D</span>
+                        <span class="tag">Мобильные</span>
+                        <span class="tag">Язык: C#</span>
+                    </div>
+                    <p>Самый популярный выбор для независимых разработчиков. Идеален для мобильных игр, пиксельных 2D-платформеров и стильных 3D-проектов. Огромное комьюнити.</p>
+                </div>
+                <a href="unity-roadmap.html" class="btn">Открыть гайды по Unity</a>
+            </div>
+
+            <!-- 2. Unreal Engine -->
+            <div class="card">
+                <div>
+                    <h3>Unreal Engine</h3>
+                    <div class="tags">
+                        <span class="tag">AAA Класс</span>
+                        <span class="tag">Реалистичный 3D</span>
+                        <span class="tag">ПК / Консоли</span>
+                        <span class="tag">Blueprints / C++</span>
+                    </div>
+                    <p>Мощный движок для создания графики нового поколения и масштабных проектов. Используется крупными студиями, но имеет бесплатный доступ для новичков.</p>
+                </div>
+                <a href="unreal-roadmap.html" class="btn">Открыть гайды по Unreal</a>
+            </div>
+
+            <!-- 3. Godot -->
+            <div class="card">
+                <div>
+                    <h3>Godot Engine</h3>
+                    <div class="tags">
+                        <span class="tag">100% Бесплатно</span>
+                        <span class="tag">Легковесный</span>
+                        <span class="tag">Лучший в 2D</span>
+                        <span class="tag">Open Source</span>
+                    </div>
+                    <p>Полностью бесплатный движок с открытым исходным кодом. Очень быстро запускается и работает даже на слабых ПК. Идеален для быстрых инди-стартов.</p>
+                </div>
+                <a href="godot-roadmap.html" class="btn">Открыть гайды по Godot</a>
+            </div>
+
+            <!-- 4. Construct 3 -->
+            <div class="card">
+                <div>
+                    <h3>Construct 3</h3>
+                    <div class="tags">
+                        <span class="tag">Без кода (No-Code)</span>
+                        <span class="tag">Только 2D</span>
+                        <span class="tag">Браузерные / HTML5</span>
+                        <span class="tag">Для новичков</span>
+                    </div>
+                    <p>Движок для тех, кто вообще не хочет писать код. Логика строится на визуальных событиях. Идеален для первых шагов, гиперказуальных и браузерных игр.</p>
+                </div>
+                <a href="construct-roadmap.html" class="btn">Открыть гайды по Construct</a>
+            </div>
+
+            <!-- 5. Ren'Py -->
+            <div class="card">
+                <div>
+                    <h3>Ren'Py</h3>
+                    <div class="tags">
+                        <span class="tag">Визуальные новеллы</span>
+                        <span class="tag">Аниме / Квесты</span>
+                        <span class="tag">Низкий порог</span>
+                        <span class="tag">Язык: Python</span>
+                    </div>
+                    <p>Специализированный движок для создания текстовых квестов и визуальных новелл (в стиле Бесконечного Лета). Очень простой скриптовый язык программирования.</p>
+                </div>
+                <a href="renpy-roadmap.html" class="btn">Открыть гайды по Ren'Py</a>
+            </div>
+
+            <!-- 6. RPG Maker -->
+<div class="card">
+                <div>
+                    <h3>RPG Maker</h3>
+                    <div class="tags">
+                        <span class="tag">JRPG / Пиксели</span>
+                        <span class="tag">Своя база данных</span>
+                        <span class="tag">Ретро-стиль</span>
+                        <span class="tag">JS плагины</span>
+                    </div>
+                    <p>Культовый инструмент для создания классических ролевых игр сверху вниз (как старые Final Fantasy). Имеет встроенный редактор карт, персонажей и диалогов.</p>
+                </div>
+                <a href="rpgmaker-roadmap.html" class="btn">Открыть гайды по RPG Maker</a>
+            </div>
+
+        </div>
+
+        <!-- Секция дополнительных инструментов сайта -->
+        <h2 class="section-title">Инструменты для старта</h2>
+        <div class="features-grid">
+            
+            <div class="feature-card">
+                <h4>🎯 Интерактивный тест</h4>
+                <p>Не знаешь, что выбрать? Наш тест проанализирует твои идеи и выдаст лучший движок.</p>
+                <a href="quiz.html" class="btn" style="padding: 5px 15px; font-size: 14px;">Начать тест</a>
+            </div>
+
+            <div class="feature-card">
+                <h4>🎲 Генератор идей</h4>
+                <p>Нужна идея для игры на Game Jam? Нажми кнопку и получи случайное комбо жанров.</p>
+                <a href="generator.html" class="btn" style="padding: 5px 15px; font-size: 14px;">Сгенерировать</a>
+            </div>
+
+            <div class="feature-card">
+                <h4>📦 База ассетов</h4>
+                <p>Список сайтов с бесплатной музыкой, текстурами, 3D-моделями и звуками для игр.</p>
+                <a href="assets.html" class="btn" style="padding: 5px 15px; font-size: 14px;">Смотреть ресурсы</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>

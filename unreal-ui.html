@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameHub — Гайды по Unreal: Интерфейс (UMG)</title>
+    <style>
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --gold: #d4af37;
+            --gold-hover: #f3e5ab;
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --code-bg: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: #050505;
+            border-bottom: 2px solid var(--gold);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+
+        .logo:hover {
+            color: var(--gold-hover);
+            text-shadow: 0 0 10px var(--gold);
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Основной контейнер */
+        .main-layout {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        /* Левая колонка: Содержание гайда */
+        .sidebar {
+            background-color: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h3 {
+            color: var(--gold);
+            margin-top: 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .roadmap-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .roadmap-steps li {
+            margin-bottom: 12px;
+        }
+
+        .roadmap-steps a {
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            background-color: #111;
+            border: 1px solid #2a2a2a;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .roadmap-steps a:hover, .roadmap-steps li.active a {
+            color: var(--gold);
+            border-color: var(--gold);
+            background-color: #1e1b10;
+        }
+
+        .step-num {
+            background-color: #252525;
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: bold;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .roadmap-steps li.active .step-num {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+        }
+
+        /* Правая колонка: Текст статьи */
+        .content-area {
+            background-color: var(--bg-card);
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 40px;
+        }
+
+        .content-area h1 {
+            color: var(--gold);
+            margin-top: 0;
+            font-size: 36px;
+        }
+.content-area h2 {
+            color: var(--gold);
+            font-size: 22px;
+            margin-top: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border-left: 4px solid var(--gold);
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            color: #f8f8f2;
+            font-size: 14px;
+        }
+
+        .info-note {
+            background-color: #1e1b10;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            padding: 15px 20px;
+            margin: 25px 0;
+        }
+
+        .info-note h4 {
+            color: var(--gold);
+            margin: 0 0 5px 0;
+        }
+
+        /* Кнопка GitHub */
+        .github-box {
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .github-info h4 {
+            margin: 0 0 5px 0;
+            color: var(--text-light);
+        }
+
+        .github-info p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .btn-github {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-github:hover {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #050505;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid #2a2a2a;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">GameHub</a>
+        <nav class="nav-links">
+            <a href="index.html#engines">Движки</a>
+            <a href="quiz.html">Пройти Тест</a>
+            <a href="assets.html">Бесплатные Ассеты</a>
+        </nav>
+    </header>
+
+    <div class="main-layout">
+        
+        <!-- Меню дорожной карты Unreal Engine (Активен 4 пункт) -->
+        <aside class="sidebar">
+            <h3>Дорожная карта UE</h3>
+            <ul class="roadmap-steps">
+                <li><a href="unreal-install.html"><span class="step-num">1</span> Установка Unreal</a></li>
+                <li><a href="unreal-roadmap.html"><span class="step-num">2</span> Передвижение 3D</a></li>
+                <li><a href="unreal-enemies.html"><span class="step-num">3</span> ИИ и Бот-патруль</a></li>
+                <li class="active"><a href="unreal-ui.html"><span class="step-num">4</span> Интерфейс (UMG)</a></li>
+                <li><a href="unreal-build.html"><span class="step-num">5</span> Сборка (Упаковка)</a></li>
+            </ul>
+        </aside>
+
+        <!-- Текст гайда по UI -->
+        <main class="content-area">
+            <h1>Создание игрового интерфейса с помощью UMG</h1>
+            <p>Система <strong>Unreal Motion Graphics (UMG)</strong> позволяет собирать интерфейсы любого уровня сложности с помощью визуального конструктора элементов (кнопок, текста, слайдеров шкалы здоровья).</p>
+            
+            <h2>Шаг 1. Создание Widget Blueprint</h2>
+            <p>В панели Content Browser нажмите правой кнопкой мыши и перейдите в раздел <strong>User Interface -> Widget Blueprint</strong>. Выберите базовый класс <code>UserWidget</code> и назовите ассет, например, <code>WBP_HUD</code>. Откройте его двойным кликом.</p>
+<div class="info-note">
+                <h4>⚠️ Правило иерархии: Canvas Panel</h4>
+                <p>Любой виджет в Unreal Engine должен начинаться с контейнера. Первым делом перетащите элемент <strong>Canvas Panel</strong> из панели Palette на рабочую область. Только внутри него вы сможете свободно распределять и выравнивать другие текстовые и графические блоки.</p>
+            </div>
+
+            <h2>Шаг 2. Вывод виджета на игровой экран</h2>
+            <p>Сам по себе созданный виджет не появится в игре автоматически. Его нужно вызвать через логику. Откройте Blueprint уровня (Level Blueprint) или вашего персонажа, и соберите цепочку из нод Create Widget (выбрав ваш класс WBP_HUD) и последующей обязательной ноды Add to Viewport.</p>
+
+            <h2>Шаг 3. Управление интерфейсом на C++ (Альтернатива)</h2>
+            <p>Для создания сложных оптимизированных интерфейсов вы можете объявить базовый класс виджета на C++, а его дизайн настраивать уже в редакторе:</p>
+
+<pre><code>// Объявление элементов виджета в заголовочном файле C++ (.h)
+#pragma once
+#include "CoreMinimal.h"
+#include "Blueprint/UserWidget.h"
+#include "Runtime/UMG/Public/Components/TextBlock.h"
+#include "MyUserWidget.generated.h"
+
+UCLASS()
+class MYPROJECT_API UMyUserWidget : public UUserWidget
+{
+    GENERATED_BODY()
+public:
+    // Позволяет связать переменную кода с текстовым блоком из Blueprint
+    UPROPERTY(meta = (BindWidget))
+    UTextBlock* ScoreText;
+};</code></pre>
+
+            <!-- Кнопка GitHub с гарантированным текстом -->
+            <div class="github-box">
+                <div class="github-info">
+                    <h4>GitHub: UE5-UMG-HUD-Retro-Pack</h4>
+                    <p>Набор готовых текстур для интерфейса, включающий рамки под мини-карты, индикаторы здоровья и шаблоны главного меню игры.</p>
+                    <a href="https://github.com" target="_blank" class="btn-github" style="display: inline-block; color: #d4af37; border: 2px solid #d4af37; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: 600;">
+                    📦 Скачать с GitHub
+                </a>
+                </div>
